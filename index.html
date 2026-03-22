@@ -3,25 +3,50 @@
 <head>
   <meta charset="UTF-8">
   <title>无与伦比的美丽</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(to bottom, #1e1e1e, #000);
+      color: white;
+      font-family: sans-serif;
+    }
+
+    h1 {
+      font-size: 40px;
+      margin-bottom: 30px;
+    }
+
+    .btn {
+      padding: 14px 28px;
+      font-size: 20px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      background: #ff4d4d;
+      color: white;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #ff1a1a;
+      transform: scale(1.05);
+    }
+  </style>
 </head>
-<body style="background:#111;color:white;text-align:center;font-family:sans-serif;">
+<body>
 
-  <h1>无与伦比的美丽</h1>
+  <h1>欢迎来到 无与伦比的美丽</h1>
 
-  <button onclick="play('song1.m4a')">song1</button>
-  <button onclick="play('song2.m4a')">song2</button>
-  <button onclick="play('song3.m4a')">song3</button>
-  <button onclick="play('song4.m4a')">song4</button>
-  <button onclick="play('song5.m4a')">song5</button>
-
-  <br><br>
-
-  <audio id="player" controls></audio>
+  <button class="btn" onclick="enter()">进入专辑</button>
 
   <script>
-    function play(file){
-      document.getElementById('player').src = file;
-      document.getElementById('player').play();
+    function enter(){
+      window.location.href = "album.html";
     }
   </script>
 
