@@ -5,19 +5,23 @@
 <title>无与伦比的美丽</title>
 
 <style>
-/* ===== 背景 + 遮罩 ===== */
+
+/* ===== 全局背景（手机稳定版） ===== */
 body{
   margin:0;
   font-family:sans-serif;
   color:white;
 
-  background: url("Taylor.png") no-repeat center center fixed;
+  /* 关键：去掉 fixed，手机才稳定 */
+  background: url("Taylor.png") no-repeat center center;
   background-size: cover;
 
   position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
-/* 黑色遮罩（关键高级感） */
+/* ===== 黑色遮罩（手机+电脑通用） ===== */
 body::before{
   content:"";
   position:fixed;
@@ -29,7 +33,7 @@ body::before{
   z-index:-1;
 }
 
-/* ===== 页面结构 ===== */
+/* ===== 页面切换 ===== */
 .page{
   display:none;
   height:100vh;
@@ -38,7 +42,6 @@ body::before{
   flex-direction:column;
 }
 
-/* 当前页面 */
 .active{
   display:flex;
 }
@@ -50,7 +53,7 @@ h1{
   margin-bottom:30px;
 }
 
-/* ===== 大按钮（首页 + 返回） ===== */
+/* ===== 大按钮 ===== */
 .big-btn{
   padding:16px 34px;
   font-size:22px;
@@ -67,15 +70,16 @@ h1{
   background:#ff1a1a;
 }
 
-/* ===== 歌曲按钮 ===== */
+/* ===== 歌曲按钮（更适合手机点击） ===== */
 .song-btn{
-  width:280px;
+  width:80%;
+  max-width:320px;
   margin:10px;
   padding:16px;
   font-size:22px;
   border:none;
   border-radius:14px;
-  background:rgba(255,255,255,0.1);
+  background:rgba(255,255,255,0.12);
   color:white;
   cursor:pointer;
   transition:0.3s;
@@ -87,10 +91,11 @@ h1{
   transform:scale(1.05);
 }
 
-/* ===== 播放器 ===== */
+/* ===== 音频播放器 ===== */
 audio{
   margin-top:20px;
-  width:320px;
+  width:85%;
+  max-width:340px;
 }
 
 </style>
@@ -117,8 +122,9 @@ audio{
 
   <audio id="player" controls></audio>
 
-  <br>
-  <button class="big-btn" style="margin-top:20px" onclick="goHome()">返回首页</button>
+  <button class="big-btn" style="margin-top:20px" onclick="goHome()">
+    返回首页
+  </button>
 
 </div>
 
