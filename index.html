@@ -2,26 +2,29 @@
 <html lang="zh">
 <head>
 <meta charset="UTF-8">
+
+<!-- ⭐ 手机必须要这个，不然全乱 -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>无与伦比的美丽</title>
 
 <style>
 
-/* ===== 全局背景（手机稳定版） ===== */
+/* ===== 基础 ===== */
 body{
   margin:0;
   font-family:sans-serif;
   color:white;
 
-  /* 关键：去掉 fixed，手机才稳定 */
   background: url("Taylor.png") no-repeat center center;
   background-size: cover;
 
-  position: relative;
-  min-height: 100vh;
-  overflow-x: hidden;
+  min-height:100vh;
+  overflow-x:hidden;
+  position:relative;
 }
 
-/* ===== 黑色遮罩（手机+电脑通用） ===== */
+/* ===== 遮罩（确保可见性） ===== */
 body::before{
   content:"";
   position:fixed;
@@ -29,73 +32,74 @@ body::before{
   left:0;
   width:100%;
   height:100%;
-  background: rgba(0,0,0,0.55);
+  background: rgba(0,0,0,0.60);
   z-index:-1;
 }
 
-/* ===== 页面切换 ===== */
+/* ===== 页面 ===== */
 .page{
   display:none;
-  height:100vh;
+  min-height:100vh;
   justify-content:center;
   align-items:center;
   flex-direction:column;
+  padding:20px;
+  text-align:center;
 }
 
 .active{
   display:flex;
 }
 
-/* ===== 标题 ===== */
+/* ===== 标题（手机放大重点） ===== */
 h1{
-  font-size:40px;
-  text-align:center;
-  margin-bottom:30px;
+  font-size: clamp(26px, 6vw, 42px);
+  margin-bottom:25px;
+  line-height:1.4;
 }
 
 /* ===== 大按钮 ===== */
 .big-btn{
-  padding:16px 34px;
-  font-size:22px;
+  padding:14px 28px;
+  font-size:20px;
   border:none;
   border-radius:14px;
   background:#ff4d4d;
   color:white;
   cursor:pointer;
-  transition:0.3s;
+  margin-top:10px;
 }
 
-.big-btn:hover{
-  transform:scale(1.08);
-  background:#ff1a1a;
+.big-btn:active{
+  transform:scale(0.96);
 }
 
-/* ===== 歌曲按钮（更适合手机点击） ===== */
+/* ===== 歌曲按钮（重点优化手机点击） ===== */
 .song-btn{
-  width:80%;
-  max-width:320px;
-  margin:10px;
-  padding:16px;
-  font-size:22px;
+  width:90%;
+  max-width:340px;
+  margin:10px 0;
+  padding:18px;
+  font-size:20px;
   border:none;
   border-radius:14px;
-  background:rgba(255,255,255,0.12);
+  background:rgba(255,255,255,0.15);
   color:white;
-  cursor:pointer;
-  transition:0.3s;
   backdrop-filter: blur(6px);
 }
 
-.song-btn:hover{
-  background:#ff4d4d;
-  transform:scale(1.05);
+/* ===== 播放器（关键修复：强制可见） ===== */
+audio{
+  width:90%;
+  max-width:360px;
+  margin-top:20px;
+  background:white;
+  border-radius:10px;
 }
 
-/* ===== 音频播放器 ===== */
-audio{
-  margin-top:20px;
-  width:85%;
-  max-width:340px;
+/* ===== 防止遮挡 ===== */
+#album{
+  padding-bottom:40px;
 }
 
 </style>
@@ -103,13 +107,13 @@ audio{
 
 <body>
 
-<!-- ================= 首页 ================= -->
+<!-- ===== 首页 ===== -->
 <div id="home" class="page active">
   <h1>欢迎来到<br>无与伦比的美丽</h1>
   <button class="big-btn" onclick="goAlbum()">进入专辑</button>
 </div>
 
-<!-- ================= 专辑页 ================= -->
+<!-- ===== 专辑页 ===== -->
 <div id="album" class="page">
 
   <h1>专辑歌曲</h1>
@@ -122,15 +126,12 @@ audio{
 
   <audio id="player" controls></audio>
 
-  <button class="big-btn" style="margin-top:20px" onclick="goHome()">
-    返回首页
-  </button>
+  <button class="big-btn" onclick="goHome()">返回首页</button>
 
 </div>
 
 <script>
 
-/* 页面切换 */
 function goAlbum(){
   document.getElementById("home").classList.remove("active");
   document.getElementById("album").classList.add("active");
@@ -141,11 +142,10 @@ function goHome(){
   document.getElementById("home").classList.add("active");
 }
 
-/* 播放音乐 */
 function play(file){
-  const player = document.getElementById("player");
-  player.src = file;
-  player.play();
+  const p = document.getElementById("player");
+  p.src = file;
+  p.play();
 }
 
 </script>
