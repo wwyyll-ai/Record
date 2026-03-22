@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>无与伦比的美丽</title>
+</head>
+<body style="background:#111;color:white;text-align:center;font-family:sans-serif;">
+
+  <h1>无与伦比的美丽</h1>
+
+  <button onclick="play('song1.m4a')">song1</button>
+  <button onclick="play('song2.m4a')">song2</button>
+  <button onclick="play('song3.m4a')">song3</button>
+  <button onclick="play('song4.m4a')">song4</button>
+  <button onclick="play('song5.m4a')">song5</button>
+
+  <br><br>
+
+  <audio id="player" controls></audio>
+
+  <script>
+    function play(file){
+      document.getElementById('player').src = file;
+      document.getElementById('player').play();
+    }
+  </script>
+
+</body>
+</html>
