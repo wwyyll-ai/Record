@@ -1,54 +1,114 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-  <meta charset="UTF-8">
-  <title>无与伦比的美丽</title>
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background: linear-gradient(to bottom, #1e1e1e, #000);
-      color: white;
-      font-family: sans-serif;
-    }
+<meta charset="UTF-8">
+<title>无与伦比的美丽</title>
 
-    h1 {
-      font-size: 40px;
-      margin-bottom: 30px;
-    }
+<style>
+body{
+  margin:0;
+  font-family:sans-serif;
+  background:#111;
+  color:white;
+}
 
-    .btn {
-      padding: 14px 28px;
-      font-size: 20px;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      background: #ff4d4d;
-      color: white;
-      transition: 0.3s;
-    }
+/* 页面切换 */
+.page{
+  display:none;
+  height:100vh;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+}
 
-    .btn:hover {
-      background: #ff1a1a;
-      transform: scale(1.05);
-    }
-  </style>
+/* 显示当前页 */
+.active{
+  display:flex;
+}
+
+/* 首页按钮 */
+.big-btn{
+  padding:16px 32px;
+  font-size:22px;
+  border:none;
+  border-radius:12px;
+  background:#ff4d4d;
+  color:white;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.big-btn:hover{
+  transform:scale(1.08);
+  background:#ff1a1a;
+}
+
+/* 歌曲按钮 */
+.song-btn{
+  width:260px;
+  margin:10px;
+  padding:16px;
+  font-size:20px;
+  border:none;
+  border-radius:14px;
+  background:#2c2c2c;
+  color:white;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.song-btn:hover{
+  background:#ff4d4d;
+  transform:scale(1.05);
+}
+
+audio{
+  margin-top:20px;
+  width:300px;
+}
+</style>
 </head>
+
 <body>
 
+<!-- 首页 -->
+<div id="home" class="page active">
   <h1>欢迎来到 无与伦比的美丽</h1>
+  <button class="big-btn" onclick="goAlbum()">进入专辑</button>
+</div>
 
-  <button class="btn" onclick="enter()">进入专辑</button>
+<!-- 专辑页 -->
+<div id="album" class="page">
+  <h1>专辑歌曲</h1>
 
-  <script>
-    function enter(){
-      window.location.href = "album.html";
-    }
-  </script>
+  <button class="song-btn" onclick="play('song1.m4a')">🎵 song1</button>
+  <button class="song-btn" onclick="play('song2.m4a')">🎵 song2</button>
+  <button class="song-btn" onclick="play('song3.m4a')">🎵 song3</button>
+  <button class="song-btn" onclick="play('song4.m4a')">🎵 song4</button>
+  <button class="song-btn" onclick="play('song5.m4a')">🎵 song5</button>
+
+  <audio id="player" controls></audio>
+
+  <button class="big-btn" style="margin-top:20px" onclick="goHome()">返回首页</button>
+</div>
+
+<script>
+function goAlbum(){
+  document.getElementById("home").classList.remove("active");
+  document.getElementById("album").classList.add("active");
+}
+
+function goHome(){
+  document.getElementById("album").classList.remove("active");
+  document.getElementById("home").classList.add("active");
+}
+
+function play(file){
+  const p = document.getElementById("player");
+  p.src = file;
+  p.play();
+}
+</script>
 
 </body>
 </html>
